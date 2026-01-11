@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ancharoge | Luxury Coffee & Cigar Lounge</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;600;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --main-red: #9e2a2b;
+            --dark: #0a0a0a;
+            --gold: #d4af37;
+            --gold-hover: #f1e5ac;
+            --text-gray: #bbb;
+        }
+
+        * { box-sizing: border-box; }
+        body { 
+            margin: 0; font-family: 'Cairo', sans-serif; 
+            background: var(--dark); color: #eee; overflow-x: hidden;
+        }
+
+        /* --- شريط التنقل --- */
+        .nav-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 50px; background: #000; position: sticky; top: 0; z-index: 1000;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .logo-small { font-family: 'Amiri', serif; font-size: 1.8rem; color: var(--gold); letter-spacing: 2px; }
+        .nav-links button {
+            background: none; border: none; color: white; cursor: pointer;
+            margin-right: 25px; font-family: 'Cairo'; font-size: 0.95rem; transition: 0.3s;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .nav-links button:hover { color: var(--gold); }
+
+        /* --- الهيدر المائل الكلاسيكي --- */
+        .top-banner {
+            background: var(--main-red);
+            padding: 100px 50px 160px;
+            clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+        }
+        .hero-flex { display: flex; justify-content: space-between; align-items: center; gap: 40px; }
+        .hero-title h1 { font-family: 'Amiri', serif; font-size: 5.5rem; color: var(--gold); margin: 0; line-height: 1; }
+        .hero-title p { font-size: 1.4rem; color: white; margin-top: 10px; opacity: 0.9; }
+        .hero-image img { 
+            width: 380px; height: 380px; border-radius: 50%; 
+            border: 10px solid rgba(255,255,255,0.05); object-fit: cover;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+        .hero-text-side { max-width: 320px; line-height: 1.8; border-right: 3px solid var(--gold); padding-right: 25px; font-size: 1.1rem; }
+
+        /* --- المنيو السريع (Grid Layout) --- */
+        .quick-menu-section { padding: 0 50px; margin-top: -80px; position: relative; z-index: 10; }
+        .quick-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .menu-box { background: #151515; padding: 30px; border-radius: 12px; border: 1px solid #222; transition: 0.4s; }
+        .box-red { background: #7b1a1b; border: none; }
+        .menu-box:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .menu-box h4 { color: var(--gold); margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 10px; font-family: 'Amiri'; font-size: 1.3rem; }
+        .box-red h4 { color: white; border-bottom-color: rgba(255,255,255,0.2); }
+        .menu-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; }
+
+        /* --- قسم السيجار الفاخر --- */
+        .cigar-section { display: flex; padding: 120px 50px; gap: 60px; align-items: center; background: #080808; }
+        .cigar-content { flex: 1; }
+        .cigar-badge { border: 1px solid var(--gold); color: var(--gold); padding: 5px 20px; font-size: 0.7rem; letter-spacing: 3px; display: inline-block; margin-bottom: 25px; }
+        .cigar-content h2 { font-family: 'Amiri', serif; font-size: 3.5rem; color: var(--gold); margin: 0 0 20px; }
+        .cigar-content p { font-size: 1.2rem; line-height: 2; color: var(--text-gray); }
+        .cigar-gallery { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .cigar-gallery img { width: 100%; border-radius: 15px; filter: grayscale(100%) brightness(0.6); transition: 0.6s; }
+        .cigar-gallery img:hover { filter: grayscale(0%) brightness(1); transform: scale(1.03); }
+
+        /* --- الموقع والرسم الهندسي --- */
+        .location-section { padding: 100px 50px; background: var(--dark); }
+        .location-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; }
+        .map-box { height: 450px; border-radius: 25px; overflow: hidden; border: 1px solid #222; filter: invert(90%) hue-rotate(180deg); }
+        .top-view-card { 
+            background: #111; padding: 40px; border-radius: 25px; border: 1px dashed var(--gold); 
+            text-align: center; display: flex; flex-direction: column; justify-content: center;
+        }
+        .top-view-card h3 { font-family: 'Amiri'; color: var(--gold); font-size: 1.8rem; }
+        .blueprint-placeholder { margin: 30px 0; font-size: 4rem; color: var(--gold); opacity: 0.2; }
+
+        /* --- أزرار التواصل الكلاسيكية --- */
+        .premium-contact { padding: 100px 20px; background: #000; text-align: center; }
+        .contact-header { display: flex; align-items: center; justify-content: center; gap: 25px; margin-bottom: 60px; }
+        .sep-line { width: 80px; height: 1px; background: var(--gold); opacity: 0.4; }
+        .luxury-btns { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+        .btn-classic {
+            position: relative; min-width: 300px; padding: 20px 40px; border: 1px solid var(--gold);
+            background: transparent; text-decoration: none; overflow: hidden; transition: 0.5s;
+        }
+        .btn-content { display: flex; align-items: center; gap: 20px; color: var(--gold); position: relative; z-index: 2; }
+        .btn-text { display: flex; flex-direction: column; text-align: right; }
+        .btn-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+        .btn-main { font-family: 'Amiri', serif; font-size: 1.4rem; font-weight: bold; }
+        .btn-hover-bg { position: absolute; top: 0; left: 0; width: 0; height: 100%; background: var(--gold); transition: 0.4s ease-out; z-index: 1; }
+        .btn-classic:hover .btn-hover-bg { width: 100%; }
+        .btn-classic:hover .btn-content { color: #000; }
+        .btn-classic:hover { transform: translateY(-10px); }
+
+        /* --- النوافذ (Modals) --- */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); }
+        .modal-content { background: white; color: #222; margin: 3% auto; padding: 50px; width: 70%; border-radius: 20px; position: relative; max-height: 90vh; overflow-y: auto; }
+        .close { position: absolute; left: 30px; top: 20px; font-size: 40px; cursor: pointer; color: #333; }
+        .full-menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: 30px; }
+        .menu-cat h3 { font-family: 'Amiri'; color: var(--main-red); border-bottom: 2px solid var(--gold); padding-bottom: 10px; font-size: 1.8rem; }
+
+        @media (max-width: 1000px) {
+            .hero-flex, .quick-grid, .cigar-section, .location-grid, .full-menu-grid { grid-template-columns: 1fr; flex-direction: column; }
+            .hero-title h1 { font-size: 3.5rem; }
+            .hero-image img { width: 280px; height: 280px; }
+            .nav-bar { padding: 15px 25px; }
+            .modal-content { width: 95%; padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <span class="logo-small">ANCHAROGE</span>
+        <div class="nav-links">
+            <button onclick="openModal('modal-menu')">القائمة / Menu</button>
+            <button onclick="openModal('modal-about')">عن المرسى / About</button>
+        </div>
+    </nav>
+
+    <header class="top-banner">
+        <div class="hero-flex">
+            <div class="hero-title" data-aos="fade-right">
+                <h1>Ancharoge</h1>
+                <p>إصدارات كدير الممتان</p>
+            </div>
+            <div class="hero-image" data-aos="zoom-in">
+                <img src="12.jpg" alt="Ancharoge Main">
+            </div>
+            <div class="hero-text-side" data-aos="fade-left">
+                <p>حيث تلتقي مياه شط العرب برائحة البن المحمص يدوياً.. تجربة حواسك تبدأ هنا في قلب البصرة.</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="quick-menu" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 50px;">
+        
+        <div class="menu-box box-black" data-aos="fade-up">
+            <h4 style="color: var(--gold); border-bottom: 1px solid #333; padding-bottom: 5px;">Classics</h4>
+            <div class="menu-item"><span>Espresso (Double)</span> <span>4,000</span></div>
+            <div class="menu-item"><span>Americano</span> <span>5,000</span></div>
+            <div class="menu-item"><span>Flat White</span> <span>7,000</span></div>
+        </div>
+
+        <div class="menu-box box-red" data-aos="fade-up" data-aos-delay="100">
+            <h4 style="color: white; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px;">Signatures</h4>
+            <div class="menu-item"><span>Fried Coffee</span> <span>9,000</span></div>
+            <div class="menu-item"><span>Iced Coffee Deluxe</span> <span>12,000</span></div>
+            <div class="menu-item"><span>Ancharoge Special</span> <span>15,000</span></div>
+        </div>
+
+        <div class="menu-box box-black" data-aos="fade-up" data-aos-delay="200">
+            <h4 style="color: var(--gold); border-bottom: 1px solid #333; padding-bottom: 5px;">Specialty Drip</h4>
+            <div class="menu-item"><span>V60 (Mandilla)</span> <span>10,000</span></div>
+            <div class="menu-item"><span>Chemex</span> <span>10,000</span></div>
+            <div class="menu-item"><span>Cold Brew (12h)</span> <span>6,000</span></div>
+        </div>
+
+        <div class="menu-box box-black" data-aos="fade-up" data-aos-delay="300">
+            <h4 style="color: var(--gold); border-bottom: 1px solid #333; padding-bottom: 5px;">Iced Latte</h4>
+            <div class="menu-item"><span>Spanish Latte</span> <span>8,000</span></div>
+            <div class="menu-item"><span>Pistachio Latte</span> <span>9,000</span></div>
+            <div class="menu-item"><span>White Mocha</span> <span>8,000</span></div>
+        </div>
+
+        <div class="menu-box box-red" data-aos="fade-up" data-aos-delay="400">
+            <h4 style="color: white; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px;">Desserts</h4>
+            <div class="menu-item"><span>San Sebastian</span> <span>8,000</span></div>
+            <div class="menu-item"><span>Premium Tiramisu</span> <span>9,000</span></div>
+            <div class="menu-item"><span>Molten Cake</span> <span>10,000</span></div>
+        </div>
+
+        <div class="menu-box box-black" data-aos="fade-up" data-aos-delay="500">
+            <h4 style="color: var(--gold); border-bottom: 1px solid #333; padding-bottom: 5px;">Cigar Selection</h4>
+            <div class="menu-item"><span>Cohiba Siglo II</span> <span>25,000</span></div>
+            <div class="menu-item"><span>Montecristo No.4</span> <span>20,000</span></div>
+            <div class="menu-item"><span>VIP Service</span> <span>Included</span></div>
+        </div>
+
+    </section>
+    <section class="cigar-section">
+        <div class="cigar-content" data-aos="fade-left">
+            <span class="cigar-badge">EXCLUSIVE EXPERIENCE</span>
+            <h2>ركن السيجار الفاخر</h2>
+            <p>مساحة خاصة صُممت لتقاسم الوقت والهدوء. نوفر لمدخني السيجار أجواءً كلاسيكية بامتياز، مع مقاعد جلدية مريحة وتهوية متطورة تضمن لك تجربة استرخاء لا تُنسى بعيداً عن صخب العالم.</p>
+        </div>
+        <div class="cigar-gallery" data-aos="fade-right">
+            <img src="122.jpg" alt="Cigar Lounge">
+            <img src="md.png" alt="Coffee and Smoke">
+        </div>
+    </section>
+
+    <section class="location-section">
+        <div class="location-grid">
+            <div class="map-box" data-aos="zoom-in">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13800.000000000000!2d47.84!3d30.52!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDMxJzEyLjAiTiA0N8KwNTAnMjQuMCJF!5e0!3m2!1sar!2siq!4v1625500000000!5m2!1sar!2siq" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <div class="top-view-card" data-aos="fade-up">
+                <h3>مخطط المرسى (Top View)</h3>
+                <div class="blueprint-placeholder">
+                    <i class="fas fa-drafting-compass"></i>
+                </div>
+                <p style="opacity: 0.7; font-size: 0.9rem;">تصميم هندسي يوفر إطلالة 180 درجة على الشط مع خصوصية تامة لكل طاولة.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="premium-contact">
+        <div class="contact-header" data-aos="fade-up">
+            <span class="sep-line"></span>
+            <h2 style="font-family: 'Amiri'; color: var(--gold); font-size: 2rem;">ارتقِ بتجربتك معنا</h2>
+            <span class="sep-line"></span>
+        </div>
+        <div class="luxury-btns">
+            <a href="https://wa.me/964000000000" class="btn-classic" data-aos="fade-left">
+                <div class="btn-content">
+                    <i class="fab fa-whatsapp"></i>
+                    <div class="btn-text">
+                        <span class="btn-label">طلب فوري عبر</span>
+                        <span class="btn-main">WHATSAPP</span>
+                    </div>
+                </div>
+                <div class="btn-hover-bg"></div>
+            </a>
+            <a href="https://instagram.com/ancharoge" class="btn-classic" data-aos="fade-right" data-aos-delay="100">
+                <div class="btn-content">
+                    <i class="fab fa-instagram"></i>
+                    <div class="btn-text">
+                        <span class="btn-label">تابعنا على</span>
+                        <span class="btn-main">INSTAGRAM</span>
+                    </div>
+                </div>
+                <div class="btn-hover-bg"></div>
+            </a>
+        </div>
+    </section>
+
+   <div id="modal-menu" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-menu')">×</span>
+            <h2 class="modal-title">قائمة Anchorage الكاملة</h2>
+            <div class="full-menu-grid">
+                
+                <div class="menu-cat">
+                    <h3>❄️ القهوة الباردة (Cold)</h3>
+                    <div class="menu-item-full"><span>Iced Coffee Deluxe</span><span>12,000</span></div>
+                    <div class="menu-item-full"><span>Spanish Latte Ice</span><span>8,000</span></div>
+                    <div class="menu-item-full"><span>Cold Brew (12h Drip)</span><span>5,000</span></div>
+                    <div class="menu-item-full"><span>Pistachio Latte</span><span>9,000</span></div>
+                    <div class="menu-item-full"><span>Caramel Frappuccino</span><span>9,000</span></div>
+                    <div class="menu-item-full"><span>Iced Americano</span><span>5,000</span></div>
+                </div>
+
+                <div class="menu-cat">
+                    <h3>☕ القهوة المختصة (Hot)</h3>
+                    <div class="menu-item-full"><span>V60 (Mandilla Bean)</span><span>10,000</span></div>
+                    <div class="menu-item-full"><span>Fried Coffee (Signiture)</span><span>9,000</span></div>
+                    <div class="menu-item-full"><span>Double Espresso</span><span>4,000</span></div>
+                    <div class="menu-item-full"><span>Flat White</span><span>7,000</span></div>
+                    <div class="menu-item-full"><span>Cortado</span><span>6,000</span></div>
+                    <div class="menu-item-full"><span>Cappuccino</span><span>7,000</span></div>
+                </div>
+
+                <div class="menu-cat">
+                    <h3>🍰 الحلويات (Desserts)</h3>
+                    <div class="menu-item-full"><span>San Sebastian Cake</span><span>8,000</span></div>
+                    <div class="menu-item-full"><span>Tiramisu (Special)</span><span>9,000</span></div>
+                    <div class="menu-item-full"><span>Chocolate Lava Cake</span><span>10,000</span></div>
+                    <div class="menu-item-full"><span>Date Pudding</span><span>7,000</span></div>
+                </div>
+
+                <div class="menu-cat">
+                    <h3>🍂 ركن السيجار (Cigar)</h3>
+                    <div class="menu-item-full"><span>Cohiba Siglo II</span><span>25,000</span></div>
+                    <div class="menu-item-full"><span>Montecristo No.4</span><span>20,000</span></div>
+                    <div class="menu-item-full"><span>Romeo y Julieta</span><span>18,000</span></div>
+                    <div class="menu-item-full"><span>Partagas Series D</span><span>22,000</span></div>
+                    <div class="menu-item-full"><span>Cigar Cutter/Lighter</span><span>خدمة مجانية</span></div>
+                </div>
+
+            </div>
+            
+            <p style="text-align: center; margin-top: 30px; font-size: 0.9rem; color: #888;">* جميع الأسعار بالدينار العراقي وتشمل الخدمة في صالة السيجار</p>
+        </div>
+    </div>
+
+    <div id="modal-about" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-about')">×</span>
+            <h2 style="text-align: center; font-family: 'Amiri'; color: var(--main-red); font-size: 2.5rem;">قصتنا</h2>
+            <div style="text-align: center; line-height: 2.2; font-size: 1.2rem; padding: 20px;">
+                <p><strong>Ancharoge</strong> ليس مجرد مقهى، بل هو مرسى للصفوة في قلب البصرة.</p>
+                <p>تأسس ليكون وجهة تجمع بين فن تحضير القهوة المختصة وفخامة جلسات السيجار الكلاسيكية، مع إطلالة مباشرة تبعث السكينة في النفس على كورنيش شط العرب.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer style="padding: 40px; text-align: center; border-top: 1px solid #1a1a1a; opacity: 0.5; font-size: 0.8rem;">
+        &copy; 2026 ANCHAROGE LOUNGE - BASRA, IRAQ
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        function openModal(id) { 
+            document.getElementById(id).style.display = "block"; 
+            document.body.style.overflow = "hidden";
+        }
+        function closeModal(id) { 
+            document.getElementById(id).style.display = "none"; 
+            document.body.style.overflow = "auto";
+        }
+        window.onclick = function(e) { if(e.target.className === 'modal') closeModal(e.target.id); }
+    </script>
+</body>
+</html>
